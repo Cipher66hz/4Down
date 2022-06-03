@@ -1,0 +1,166 @@
+#!/bin/bash
+
+#NOTE, you need to have curl and wget installed.
+
+set -euo pipefail
+IFS=$'\n\t'
+#Make shit not fuckup ^
+
+
+#Functions go here : 
+
+DownloadJustContent() {
+echo "DownloadJustContent function executed"
+echo "Thread URL is:" $threadurl
+echo "Board name is:" $BoardName
+echo "Thread number is:" $threadnumber
+#wget -nd -r --level=1  -e robots=off -A jpg,jpeg,png,webp,gif,webm,tmp,html -H --wait 1 $threadurl
+wget -nd -r --level=1  -e robots=off -A jpg,jpeg,png,webp,gif,webm,tmp,html -H --wait 1 $threadurl
+
+KeepOrDelete
+}
+
+DownloadWholeThread(){
+echo "DownloadWholeThread function executed"
+echo "Thread URL is:" $threadurl
+echo "Board name is:" $BoardName
+echo "Thread number is:" $threadnumber
+
+#Notes to self :
+
+#What some bro on 4chan gave to me to answer this issue :
+#wget -r -H -D i.4cdn.org,boards.4channel.org -I "$BoardName",thread -p -P . -A html,jpg,jpeg,gif,png,webm https://boards.4channel.org/$BoardName/thread/<thread#> -e robots=off --wait 1 $threadurl
+#My modified version can be found below
+#wget -r -H --page-requisites -D i.4cdn.org/$BoardName , boards.4channel.org/$BoardName , boards.4chan.org/$BoardName -I "$BoardName",thread -p -P --convert-links -A html,jpg,jpeg,gif,png,webm https://boards.4channel.org/$BoardName/thread/$threadnumber -e robots=off --wait 1 $threadurl
+#
+#The part that does not work is the -D flag where it tries to just allow itself to download from those URLs. It has to be fully recursive or limit the recursion for now.
+
+
+#Notes to self ^^
+
+
+wget -m -l 1 -np -p -e robots=off -k -w 1 $threadurl
+
+KeepOrDelete
+}
+
+KeepOrDelete() {
+printf " \n Congratulations ! The download has finished ! Would you now like to delete all of the small versions of files ? (Aka the (number)s version , for example 1450614069094s. \n These versions are the smaller versions of files and therefor arent really neccessary and just are duplicates. \n Enter Yes(Y) to delete these duplicates (recommended) or No(N) to keep them"
+
+read -p "Answer choice , here (Number associated with option) :" KeepOrDelete
+if [ $KeepOrDelete = y ] ||  $KeepOrDelete = Y ]
+then
+	echo "KeepOrDelete = Y"
+	echo $KeepOrDelete
+
+	read -p "Are you ready to proceed ? (Enter y/n) : " aretheyreadytoproceed
+	if [ $aretheyreadytoproceed == y ] || [ $aretheyreadytoproceed == Y ]
+	then
+		echo "Commencing!"
+		find -type f -name 's' -delete
+		echo "Deleting!"
+		echo "Thank you for using Cipher's 4chan thread download tool ! I appreciate it and hopefully it could help you. Please feel free to modify and distribute this program as you wish as it is Free Software"
+
+	fi
+exit 1
+fi
+
+if [ $KeepOrDelete = n ] ||  [ $KeepOrDelete = N ]
+then
+	echo "KeepOrDelete = N"
+	echo $KeepOrDelete
+	echo "You arent deleting anything"
+	echo "Thank you for using Cipher's 4chan thread download tool ! I appreciate it and hopefully it could help you. Please feel free to modify and distribute this program as you wish as it is Free Software"
+exit 1
+fi
+
+
+}
+
+#STARTS HERE, aka querying the user, all of the special functions go above
+#$(tput setaf 3) is used for making the text green.
+echo "					Cipher's 4chan thread download tool						As a note you should also have cd'd into the directory where you want all of these contents to download to"
+read -p " Enter the URL of the thread that you wanna do shit with here :" threadurl
+echo "$threadurl"
+
+
+
+url_length=${#threadurl}
+
+#https://boards.4channel.org/wsg/thread/4483299
+#Example thread ^^^
+
+
+#Make a copy of threadurl (original value inputted by the user) into thread_url_stripped to modify
+thread_url_stripped=$threadurl
+echo $thread_url_stripped
+
+thread_url_stripped="${thread_url_stripped#https://boards.4channel.org}"
+echo "$thread_url_stripped"
+thread_url_stripped=${thread_url_stripped//thread/}
+echo "$thread_url_stripped"
+thread_url_stripped=${thread_url_stripped///}
+echo "$thread_url_stripped"
+thread_url_stripped=${thread_url_stripped//[0-9]/}
+echo "$thread_url_stripped"
+
+BoardName=$thread_url_stripped
+
+
+thread_number_stripped=$threadurl
+thread_number_stripped="${thread_number_stripped#https://boards.4channel.org}"
+echo "$thread_url_stripped"
+thread_number_stripped=${thread_number_stripped//thread/}
+echo "$thread_number_stripped"
+thread_number_stripped=${thread_number_stripped///}
+echo "$thread_number_stripped"
+thread_number_stripped=${thread_number_stripped//[!0-9]/}
+echo "$thread_number_stripped"
+
+threadnumber=$thread_number_stripped
+
+printf "Which of the following choices do you want ? \n 1) Download just the content from the thread (images and videos). \n 2)  Download the entire thread and all of the stuff required to display it \n"
+read -p "Answer choice , here (Number associated with option) :" Userchoice
+echo $Userchoice
+if [ $Userchoice = 1 ]
+then
+echo "userchoice = 1"
+	FunctionToExecute=DownloadJustContent
+	echo $FunctionToExecute
+
+	read -p "Are you ready to proceed ? (Enter y/n) : " aretheyreadytoproceed
+	if [ $aretheyreadytoproceed == y ]
+	then
+	echo "Commencing!"
+	DownloadJustContent
+	echo $DownloadJustContent
+
+	fi
+fi
+
+if [ $Userchoice = 2 ]
+then
+echo "userchoice = 2"
+	FunctionToExecute=DownloadWholeThread
+	echo $FunctionToExecute
+
+	read -p "Are you ready to proceed ? (Enter y/n) : " aretheyreadytoproceed
+	if [ $aretheyreadytoproceed == y ]
+	then
+	echo "Commencing!"
+	DownloadWholeThread
+	echo $DownloadWholeThread
+
+	fi
+
+fi
+
+
+
+
+
+
+
+
+
+#Wow, you're reading this ! That must mean that you're reading over the software you use ! Yay!

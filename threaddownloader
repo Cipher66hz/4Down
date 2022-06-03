@@ -57,7 +57,7 @@ then
 	if [ $aretheyreadytoproceed == y ] || [ $aretheyreadytoproceed == Y ]
 	then
 		echo "Commencing!"
-		find -type f -name 's' -delete
+		find -type f -name '*s*' -delete
 		echo "Deleting!"
 		echo "Thank you for using Cipher's 4chan thread download tool ! I appreciate it and hopefully it could help you. Please feel free to modify and distribute this program as you wish as it is Free Software"
 

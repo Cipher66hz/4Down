@@ -13,6 +13,8 @@ To install them you can use the following (depending on your distro)
 
 These are usually preinstalled or you have them installed from another package, but just incase, its up there ^^^ !
 
+Once you have the prerequisites installed, you can downlaod the program, you can either download the entire .zip from this github, or just the script itself. Once you download the script, make it executable using ```chmod +x threaddownloader``` in the correct directory , also make sure it is in your $PATH variable. So for example /$HOME/scripts/. You can then run it via the terminal.
+
 /// Operation :
 
 CD into the folder where you want the contents to download, this is mainly just to make sure you dont fill up your home folder with stuff (wget may have some issues and create folders, Im sure you can figure out where things get downloaded).

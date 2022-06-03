@@ -3,13 +3,13 @@ A tool for downloading threads from 4chan
 
         Please read this before proceeding : 
 
-This tool uses ``wget`` and ``curl`` and thus you need to have those installed as dependencies. This is my first "actual" script that Im publishing, there may be some issues with it, but you're more than welcome to change it. Thank you!
+This tool uses ``wget`` and thus you need to have it installed as a dependency. This is my first "actual" script that Im publishing, there may be some issues with it, but you're more than welcome to change it. Thank you!
 
-To install them you can use the following (depending on your distro)
+To install the needed dependencies you can use the following (depending on your distro)
 
-        Arch/Derivatives : sudo pacman -S curl wget
-        Debian/many family members : sudo apt install curl wget
-        Fedora : sudo rpm install curl wget
+        Arch/Derivatives : sudo pacman -S wget
+        Debian/many family members : sudo apt install wget
+        Fedora : sudo rpm install wget
 
 These are usually preinstalled or you have them installed from another package, but just incase, its up there ^^^ !
 

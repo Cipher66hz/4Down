@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#NOTE, you need to have curl and wget installed.
+#NOTE, you need to have wget installed.
 
 set -euo pipefail
 IFS=$'\n\t'

@@ -6,6 +6,7 @@ This tool uses wget and curl and thus you need to have those installed as depend
 
 
 /// Operation :
+
 CD into the folder where you want the contents to download, this is mainly just to make sure you dont fill up your home folder with stuff (wget may have some issues and create folders, Im sure you can figure out where things get downloaded).
 
 Run ``threaddownloader`` and make sure its in your path.

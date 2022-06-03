@@ -7,12 +7,11 @@ This tool uses ``wget`` and ``curl`` and thus you need to have those installed a
 
 To install them you can use the following (depending on your distro)
 
-        Arch/Derivatives : paru -S threaddownloader curl wget
-        Debian/many family members : sudo apt install 
-        
-        There may be support for other distros over time but for now its just gonna be those two.
+        Arch/Derivatives : sudo pacman -S curl wget
+        Debian/many family members : sudo apt install curl wget
+        Fedora : sudo rpm install curl wget
 
-
+These are usually preinstalled or you have them installed from another package, but just incase, its up there ^^^ !
 
 /// Operation :
 

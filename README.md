@@ -1,7 +1,9 @@
 # threaddownloader
 A tool for downloading threads from 4chan
 
-This tool uses wget and curl and thus you need to have those installed as dependencies. This is my first "actual" script that Im publishing, there may be some issues with it, but you're more than welcome to change it. Thank you!
+        Please read this before proceeding : 
+
+This tool uses ``wget`` and ``curl`` and thus you need to have those installed as dependencies. This is my first "actual" script that Im publishing, there may be some issues with it, but you're more than welcome to change it. Thank you!
 
 
 

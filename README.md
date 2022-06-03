@@ -5,6 +5,13 @@ A tool for downloading threads from 4chan
 
 This tool uses ``wget`` and ``curl`` and thus you need to have those installed as dependencies. This is my first "actual" script that Im publishing, there may be some issues with it, but you're more than welcome to change it. Thank you!
 
+To install them you can use the following (depending on your distro)
+
+        Arch/Derivatives : paru -S threaddownloader curl wget
+        Debian/many family members : sudo apt install 
+        
+        There may be support for other distros over time but for now its just gonna be those two.
+
 
 
 /// Operation :

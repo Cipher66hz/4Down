@@ -53,7 +53,7 @@ keepOrDelete() {
   printf " \n Congratulations! The download has finished! Would you now like to delete all of the small versions of files? (Aka the (number)s version, for example 1450614069094s. \n These versions are the smaller versions of files and therefor arent really neccessary and just are duplicates. \n Enter Yes(Y) to delete these duplicates (recommended) or No(N) to keep them\n"
 
   read -p "Answer choice, here (Letter associated with option): " choice
-  if [ $choice == y ] || $choice == Y ]; then
+  if [ $choice == y ] || [ $choice == Y ]; then
     echo "choice = Y"
     echo $choice
 

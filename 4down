@@ -52,10 +52,10 @@ downloadEverything() {
 keepOrDelete() {
   printf " \n Congratulations! The download has finished! Would you now like to delete all of the small versions of files? (Aka the (number)s version, for example 1450614069094s. \n These versions are the smaller versions of files and therefor arent really neccessary and just are duplicates. \n Enter Yes(Y) to delete these duplicates (recommended) or No(N) to keep them\n"
 
-  read -p "Answer choice, here (Letter associated with option): " keepOrDelete
-  if [ $keepOrDelete == y ] || $keepOrDelete == Y ]; then
-    echo "keepOrDelete = Y"
-    echo $keepOrDelete
+  read -p "Answer choice, here (Letter associated with option): " choice
+  if [ $choice == y ] || $choice == Y ]; then
+    echo "choice = Y"
+    echo $choice
 
     read -p "Are you ready to proceed? (Enter y/n): " proceed
     if [ $proceed == y ] || [ $proceed == Y ]; then
@@ -68,9 +68,9 @@ keepOrDelete() {
     exit 1
   fi
 
-  if [ $keepOrDelete == n ] || [ $keepOrDelete == N ]; then
-    echo "keepOrDelete = N"
-    echo $keepOrDelete
+  if [ $choice == n ] || [ $choice == N ]; then
+    echo "choice = N"
+    echo $choice
     echo "You arent deleting anything"
     echo "Thank you for using Cipher's 4chan thread download tool! I appreciate it and hopefully it could help you. Please feel free to modify and distribute this program as you wish as it is Free Software"
     exit 1

@@ -1,13 +1,12 @@
-#!/bin/bash
 
-#NOTE, you need to have wget installed.
+#!/bin/bash
 
 set -euo pipefail
 IFS=$'\n\t'
 #Make shit not fuckup ^
 
 
-#Functions go here : 
+#Functions go here :
 
 DownloadJustContent() {
 echo "DownloadJustContent function executed"
@@ -27,7 +26,6 @@ echo "Board name is:" $BoardName
 echo "Thread number is:" $threadnumber
 
 #Notes to self :
-
 #What some bro on 4chan gave to me to answer this issue :
 #wget -r -H -D i.4cdn.org,boards.4channel.org -I "$BoardName",thread -p -P . -A html,jpg,jpeg,gif,png,webm https://boards.4channel.org/$BoardName/thread/<thread#> -e robots=off --wait 1 $threadurl
 #My modified version can be found below
@@ -35,12 +33,23 @@ echo "Thread number is:" $threadnumber
 #
 #The part that does not work is the -D flag where it tries to just allow itself to download from those URLs. It has to be fully recursive or limit the recursion for now.
 
-
 #Notes to self ^^
 
 
 wget -m -l 1 -np -p -e robots=off -k -w 1 $threadurl
 
+KeepOrDelete
+}
+
+
+DownloadEVERYTHING() {
+echo "DownloadEVERYTHING function executed"
+echo "Thread URL is:" $threadurl
+echo "Board name is:" $BoardName
+echo "Thread number is:" $threadnumber
+
+wget -m -l 1 -np -p -e robots=off -k -w 1 $threadurl
+wget -nd -r --level=1  -e robots=off -A jpg,jpeg,png,webp,gif,webm,tmp,html -H --wait 1 $threadurl
 KeepOrDelete
 }
 
@@ -79,7 +88,15 @@ fi
 
 #STARTS HERE, aka querying the user, all of the special functions go above
 #$(tput setaf 3) is used for making the text green.
-echo "					Cipher's 4chan thread download tool						As a note you should also have cd'd into the directory where you want all of these contents to download to"
+echo "					Cipher's 4chan thread download tool						"
+#printf "
+#  / // / ____/ /___ _      ______
+# / // /_/ __  / __ \ | /| / / __ \
+#/__  __/ /_/ / /_/ / |/ |/ / / / /
+#  /_/  \____/\____/|__/|__/_/ /_/
+#"
+
+echo "As a note you should also have cd'd into the directory where you want all of these contents to download to"
 read -p " Enter the URL of the thread that you wanna do shit with here :" threadurl
 echo "$threadurl"
 
@@ -119,7 +136,7 @@ echo "$thread_number_stripped"
 
 threadnumber=$thread_number_stripped
 
-printf "Which of the following choices do you want ? \n 1) Download just the content from the thread (images and videos). \n 2)  Download the entire thread and all of the stuff required to display it \n"
+printf "Which of the following choices do you want ? \n 1) Download just the content from the thread (images and videos). \n 2)  Download the entire thread and all of the stuff required to display it. \n 3) 2 and 1 combined, it downloads all of the content and a visible version of the thread!"
 read -p "Answer choice , here (Number associated with option) :" Userchoice
 echo $Userchoice
 if [ $Userchoice = 1 ]
@@ -155,7 +172,22 @@ echo "userchoice = 2"
 
 fi
 
+if [ $Userchoice = 3 ]
+then
+echo "userchoice = 3"
+	FunctionToExecute=DownloadEVERYTHING
+	echo $FunctionToExecute
 
+	read -p "Are you ready to proceed ? (Enter y/n) : " aretheyreadytoproceed
+	if [ $aretheyreadytoproceed == y ]
+	then
+	echo "Commencing!"
+	DownloadEVERYTHING
+	echo $DownloadEVERYTHING
+
+	fi
+
+fi
 
 
 

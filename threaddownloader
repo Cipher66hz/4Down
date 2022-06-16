@@ -47,7 +47,7 @@ KeepOrDelete
 KeepOrDelete() {
 printf " \n Congratulations ! The download has finished ! Would you now like to delete all of the small versions of files ? (Aka the (number)s version , for example 1450614069094s. \n These versions are the smaller versions of files and therefor arent really neccessary and just are duplicates. \n Enter Yes(Y) to delete these duplicates (recommended) or No(N) to keep them"
 
-read -p "Answer choice , here (Number associated with option) :" KeepOrDelete
+read -p "Answer choice , here (Letter associated with option) :" KeepOrDelete
 if [ $KeepOrDelete = y ] ||  $KeepOrDelete = Y ]
 then
 	echo "KeepOrDelete = Y"

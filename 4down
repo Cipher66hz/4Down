@@ -2,16 +2,16 @@
 
 set -euo pipefail
 IFS=$'\n\t'
-#Make shit not fuckup ^
+# Strict mode ^
 
-#Functions go here :
+# Functions go here :
 
 downloadContent() {
   echo "downloadContent function executed"
-  echo "Thread URL is:" $threadURL
-  echo "Board name is:" $boardName
-  echo "Thread number is:" $threadNumber
-  #wget -nd -r --level=1  -e robots=off -A jpg,jpeg,png,webp,gif,webm,tmp,html -H --wait 1 $threadURL
+  echo "Thread URL is: " $threadURL
+  echo "Board name is: " $boardName
+  echo "Thread number is: " $threadNumber
+  # wget -nd -r --level=1 -e robots=off -A jpg,jpeg,png,webp,gif,webm,tmp,html -H --wait 1 $threadURL
   wget -nd -r --level=1 -e robots=off -A jpg,jpeg,png,webp,gif,webm,tmp,html -H --wait 1 $threadURL
 
   keepOrDelete
@@ -19,19 +19,19 @@ downloadContent() {
 
 downloadThread() {
   echo "downloadThread function executed"
-  echo "Thread URL is:" $threadURL
-  echo "Board name is:" $boardName
-  echo "Thread number is:" $threadNumber
+  echo "Thread URL is: " $threadURL
+  echo "Board name is: " $boardName
+  echo "Thread number is: " $threadNumber
 
-  #Notes to self :
-  #What some bro on 4chan gave to me to answer this issue :
-  #wget -r -H -D i.4cdn.org,boards.4channel.org -I "$boardName",thread -p -P . -A html,jpg,jpeg,gif,png,webm https://boards.4channel.org/$boardName/thread/<thread#> -e robots=off --wait 1 $threadURL
-  #My modified version can be found below
-  #wget -r -H --page-requisites -D i.4cdn.org/$boardName , boards.4channel.org/$boardName , boards.4chan.org/$boardName -I "$boardName",thread -p -P --convert-links -A html,jpg,jpeg,gif,png,webm https://boards.4channel.org/$boardName/thread/$threadNumber -e robots=off --wait 1 $threadURL
+  # Notes to self :
+  # What some bro on 4chan gave to me to answer this issue :
+  # wget -r -H -D i.4cdn.org,boards.4channel.org -I "$boardName",thread -p -P . -A html,jpg,jpeg,gif,png,webm https://boards.4channel.org/$boardName/thread/<thread#> -e robots=off --wait 1 $threadURL
+  # My modified version can be found below
+  # wget -r -H --page-requisites -D i.4cdn.org/$boardName , boards.4channel.org/$boardName, boards.4chan.org/$boardName -I "$boardName",thread -p -P --convert-links -A html,jpg,jpeg,gif,png,webm https://boards.4channel.org/$boardName/thread/$threadNumber -e robots=off --wait 1 $threadURL
   #
-  #The part that does not work is the -D flag where it tries to just allow itself to download from those URLs. It has to be fully recursive or limit the recursion for now.
+  # The part that does not work is the -D flag where it tries to just allow itself to download from those URLs. It has to be fully recursive or limit the recursion for now.
 
-  #Notes to self ^^
+  # Notes to self ^^
 
   wget -m -l 1 -np -p -e robots=off -k -w 1 $threadURL
 
@@ -40,9 +40,9 @@ downloadThread() {
 
 downloadEverything() {
   echo "downloadEverything function executed"
-  echo "Thread URL is:" $threadURL
-  echo "Board name is:" $boardName
-  echo "Thread number is:" $threadNumber
+  echo "Thread URL is: " $threadURL
+  echo "Board name is: " $boardName
+  echo "Thread number is: " $threadNumber
 
   wget -m -l 1 -np -p -e robots=off -k -w 1 $threadURL
   wget -nd -r --level=1 -e robots=off -A jpg,jpeg,png,webp,gif,webm,tmp,html -H --wait 1 $threadURL
@@ -50,19 +50,19 @@ downloadEverything() {
 }
 
 keepOrDelete() {
-  printf " \n Congratulations ! The download has finished ! Would you now like to delete all of the small versions of files ? (Aka the (number)s version , for example 1450614069094s. \n These versions are the smaller versions of files and therefor arent really neccessary and just are duplicates. \n Enter Yes(Y) to delete these duplicates (recommended) or No(N) to keep them"
+  printf " \n Congratulations! The download has finished! Would you now like to delete all of the small versions of files? (Aka the (number)s version, for example 1450614069094s. \n These versions are the smaller versions of files and therefor arent really neccessary and just are duplicates. \n Enter Yes(Y) to delete these duplicates (recommended) or No(N) to keep them\n"
 
-  read -p "Answer choice , here (Letter associated with option) :" keepOrDelete
+  read -p "Answer choice, here (Letter associated with option): " keepOrDelete
   if [ $keepOrDelete = y ] || $keepOrDelete = Y ]; then
     echo "keepOrDelete = Y"
     echo $keepOrDelete
 
-    read -p "Are you ready to proceed ? (Enter y/n) : " proceed
+    read -p "Are you ready to proceed? (Enter y/n): " proceed
     if [ $proceed == y ] || [ $proceed == Y ]; then
       echo "Commencing!"
       find -type f -name '*s*' -delete
       echo "Deleting!"
-      echo "Thank you for using Cipher's 4chan thread download tool ! I appreciate it and hopefully it could help you. Please feel free to modify and distribute this program as you wish as it is Free Software"
+      echo "Thank you for using Cipher's 4chan thread download tool! I appreciate it and hopefully it could help you. Please feel free to modify and distribute this program as you wish as it is Free Software"
 
     fi
     exit 1
@@ -72,15 +72,15 @@ keepOrDelete() {
     echo "keepOrDelete = N"
     echo $keepOrDelete
     echo "You arent deleting anything"
-    echo "Thank you for using Cipher's 4chan thread download tool ! I appreciate it and hopefully it could help you. Please feel free to modify and distribute this program as you wish as it is Free Software"
+    echo "Thank you for using Cipher's 4chan thread download tool! I appreciate it and hopefully it could help you. Please feel free to modify and distribute this program as you wish as it is Free Software"
     exit 1
   fi
 
 }
 
-#STARTS HERE, aka querying the user, all of the special functions go above
-#$(tput setaf 3) is used for making the text green.
-echo "					Cipher's 4chan thread download tool						"
+# STARTS HERE, aka querying the user, all of the special functions go above
+# $(tput setaf 3) is used for making the text green.
+echo "					Cipher's 4chan thread download tool"
 printf "
   / // / ____/ /___ _      ______
  / // /_/ __  / __ \\ | /| / / __ \\
@@ -89,15 +89,15 @@ printf "
 "
 
 echo "As a note you should also have cd'd into the directory where you want all of these contents to download to"
-read -p " Enter the URL of the thread that you wanna do shit with here :" threadURL
+read -p " Enter the URL of the thread that you want to download: " threadURL
 echo "$threadURL"
 
 urlLength=${#threadURL}
 
-#https://boards.4channel.org/wsg/thread/4483299
-#Example thread ^^^
+# https://boards.4channel.org/wsg/thread/4483299
+# Example thread ^^^
 
-#Make a copy of threadURL (original value inputted by the user) into threadURLStripped to modify
+# Make a copy of threadURL (original value inputted by the user) into threadURLStripped to modify
 threadURLStripped=$threadURL
 echo $threadURLStripped
 
@@ -124,15 +124,15 @@ echo "$threadNumStripped"
 
 threadNumber=$threadNumStripped
 
-printf "Which of the following choices do you want ? \n 1) Download just the content from the thread (images and videos). \n 2)  Download the entire thread and all of the stuff required to display it. \n 3) 2 and 1 combined, it downloads all of the content and a visible version of the thread!"
-read -p "Answer choice , here (Number associated with option) :" userChoice
+printf "Which of the following choices do you want? \n 1) Download just the content from the thread (images and videos). \n 2) Download the entire thread and all of the stuff required to display it. \n 3) 2 and 1 combined, it downloads all of the content and a visible version of the thread!\n"
+read -p "Answer choice, here (Number associated with option): " userChoice
 echo $userChoice
 if [ $userChoice = 1 ]; then
   echo "userchoice = 1"
   executeFunction=downloadContent
   echo $executeFunction
 
-  read -p "Are you ready to proceed ? (Enter y/n) : " proceed
+  read -p "Are you ready to proceed? (Enter y/n): " proceed
   if [ $proceed == y ]; then
     echo "Commencing!"
     downloadContent
@@ -146,7 +146,7 @@ if [ $userChoice = 2 ]; then
   executeFunction=downloadThread
   echo $executeFunction
 
-  read -p "Are you ready to proceed ? (Enter y/n) : " proceed
+  read -p "Are you ready to proceed? (Enter y/n): " proceed
   if [ $proceed == y ]; then
     echo "Commencing!"
     downloadThread
@@ -161,7 +161,7 @@ if [ $userChoice = 3 ]; then
   executeFunction=downloadEverything
   echo $executeFunction
 
-  read -p "Are you ready to proceed ? (Enter y/n) : " proceed
+  read -p "Are you ready to proceed? (Enter y/n): " proceed
   if [ $proceed == y ]; then
     echo "Commencing!"
     downloadEverything
@@ -171,4 +171,4 @@ if [ $userChoice = 3 ]; then
 
 fi
 
-#Wow, you're reading this ! That must mean that you're reading over the software you use ! Yay!
+# Wow, you're reading this! That must mean that you're reading over the software you use! Yay!

@@ -127,48 +127,24 @@ threadNumber=$threadNumStripped
 printf "Which of the following choices do you want? \n 1) Download just the content from the thread (images and videos). \n 2) Download the entire thread and all of the stuff required to display it. \n 3) 2 and 1 combined, it downloads all of the content and a visible version of the thread!\n"
 read -p "Answer choice, here (Number associated with option): " userChoice
 echo $userChoice
-if [ $userChoice == 1 ]; then
-  echo "userchoice = 1"
-  executeFunction=downloadContent
-  echo $executeFunction
-
-  read -p "Are you ready to proceed? (Enter y/n): " proceed
+read -p "Are you ready to proceed? (Enter y/n): " proceed
   if [ $proceed == y ]; then
     echo "Commencing!"
-    downloadContent
-    echo $downloadContent
-
-  fi
-fi
-
-if [ $userChoice == 2 ]; then
-  echo "userchoice = 2"
-  executeFunction=downloadThread
-  echo $executeFunction
-
-  read -p "Are you ready to proceed? (Enter y/n): " proceed
-  if [ $proceed == y ]; then
-    echo "Commencing!"
-    downloadThread
-    echo $downloadThread
-
   fi
 
-fi
-
-if [ $userChoice == 3 ]; then
-  echo "userchoice = 3"
-  executeFunction=downloadEverything
-  echo $executeFunction
-
-  read -p "Are you ready to proceed? (Enter y/n): " proceed
-  if [ $proceed == y ]; then
-    echo "Commencing!"
-    downloadEverything
-    echo $downloadEverything
-
-  fi
-
-fi
+# use case statement to determine which choice the user has chosen
+case $userChoice in
+  1)
+  downloadContent
+    ;;
+  2)
+  downloadThread
+    ;;
+  3)
+  downloadEverything
+    ;;
+  *)
+    echo "Invalid choice"
+    ;;
 
 # Wow, you're reading this! That must mean that you're reading over the software you use! Yay!

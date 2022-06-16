@@ -53,7 +53,7 @@ keepOrDelete() {
   printf " \n Congratulations! The download has finished! Would you now like to delete all of the small versions of files? (Aka the (number)s version, for example 1450614069094s. \n These versions are the smaller versions of files and therefor arent really neccessary and just are duplicates. \n Enter Yes(Y) to delete these duplicates (recommended) or No(N) to keep them\n"
 
   read -p "Answer choice, here (Letter associated with option): " keepOrDelete
-  if [ $keepOrDelete = y ] || $keepOrDelete = Y ]; then
+  if [ $keepOrDelete == y ] || $keepOrDelete == Y ]; then
     echo "keepOrDelete = Y"
     echo $keepOrDelete
 
@@ -68,7 +68,7 @@ keepOrDelete() {
     exit 1
   fi
 
-  if [ $keepOrDelete = n ] || [ $keepOrDelete = N ]; then
+  if [ $keepOrDelete == n ] || [ $keepOrDelete == N ]; then
     echo "keepOrDelete = N"
     echo $keepOrDelete
     echo "You arent deleting anything"
@@ -127,7 +127,7 @@ threadNumber=$threadNumStripped
 printf "Which of the following choices do you want? \n 1) Download just the content from the thread (images and videos). \n 2) Download the entire thread and all of the stuff required to display it. \n 3) 2 and 1 combined, it downloads all of the content and a visible version of the thread!\n"
 read -p "Answer choice, here (Number associated with option): " userChoice
 echo $userChoice
-if [ $userChoice = 1 ]; then
+if [ $userChoice == 1 ]; then
   echo "userchoice = 1"
   executeFunction=downloadContent
   echo $executeFunction
@@ -141,7 +141,7 @@ if [ $userChoice = 1 ]; then
   fi
 fi
 
-if [ $userChoice = 2 ]; then
+if [ $userChoice == 2 ]; then
   echo "userchoice = 2"
   executeFunction=downloadThread
   echo $executeFunction
@@ -156,7 +156,7 @@ if [ $userChoice = 2 ]; then
 
 fi
 
-if [ $userChoice = 3 ]; then
+if [ $userChoice == 3 ]; then
   echo "userchoice = 3"
   executeFunction=downloadEverything
   echo $executeFunction

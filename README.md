@@ -37,6 +37,4 @@ Wait...
 Congratulations ! You have downloaded a thread ! You have just one more step before you're done, you choose whether you want to delete the small preview versions of files (marked with an "s" at the end), or if you want to delete the preview versions. Typically there isn't really a point in downloading the preview versions too so I usually delete them.
 
 
-Aaaand now you are done!
-
-Thank you for using 4Down!
+Thank you for using 4Down! If you have any questions, please feel free to reach out.

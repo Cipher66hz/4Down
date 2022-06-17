@@ -12,7 +12,9 @@ downloadContent() {
   echo "Board name is: " $boardName
   echo "Thread number is: " $threadNumber
   # wget -nd -r --level=1 -e robots=off -A jpg,jpeg,png,webp,gif,webm,tmp,html -H --wait 1 $threadURL
-  wget -nd -r --level=1 -e robots=off -A jpg,jpeg,png,webp,gif,webm,tmp,html -H --wait 1 $threadURL
+
+  mkdir -p $boardName/$threadNumber
+  wget -P $boardName/$threadNumber -nd -r -p -e robots=off -D i.4cdn.org -A jpg,jpeg,png,webp,gif,webm,tmp,html,mp4,mp3,m4a -H $threadURL/ -q --show-progress
 
   keepOrDelete
 }
@@ -33,7 +35,7 @@ downloadThread() {
 
   # Notes to self ^^
 
-  wget -m -l 1 -np -p -e robots=off -k -w 1 $threadURL
+  wget -m -l 1 -np -p -e robots=off -w 1 -k $threadURL -q --show-progress
 
   keepOrDelete
 }
@@ -44,8 +46,9 @@ downloadEverything() {
   echo "Board name is: " $boardName
   echo "Thread number is: " $threadNumber
 
-  wget -m -l 1 -np -p -e robots=off -k -w 1 $threadURL
-  wget -nd -r --level=1 -e robots=off -A jpg,jpeg,png,webp,gif,webm,tmp,html -H --wait 1 $threadURL
+  wget -m -l 1 -nd -np -P $boardName/$threadNumber -e robots=off -k -w 1 $threadURL -q --show-progress
+  wget -P $boardName/$threadNumber -nd -np -r -p -e robots=off -D i.4cdn.org -A jpg,jpeg,png,webp,gif,webm,tmp,html,mp4,mp3,m4a -H $threadURL/ -q --show-progress
+
   keepOrDelete
 }
 
@@ -60,12 +63,12 @@ keepOrDelete() {
     read -p "Are you ready to proceed? (Enter y/n): " proceed
     if [ $proceed == y ] || [ $proceed == Y ]; then
       echo "Commencing!"
-      find -type f -name '*s*' -delete
+      find -type f -name '*s.*' -delete
       echo "Deleting!"
       echo "Thank you for using Cipher's 4chan thread download tool! I appreciate it and hopefully it could help you. Please feel free to modify and distribute this program as you wish as it is Free Software"
 
     fi
-    exit 1
+    exit 0
   fi
 
   if [ $choice == n ] || [ $choice == N ]; then
@@ -73,7 +76,7 @@ keepOrDelete() {
     echo $choice
     echo "You arent deleting anything"
     echo "Thank you for using Cipher's 4chan thread download tool! I appreciate it and hopefully it could help you. Please feel free to modify and distribute this program as you wish as it is Free Software"
-    exit 1
+    exit 0
   fi
 
 }
@@ -129,7 +132,7 @@ printf "Which of the following choices do you want? \n 1) Download just the cont
 read -p "Answer choice, here (Number associated with option): " userChoice
 echo $userChoice
 read -p "Are you ready to proceed? (Enter y/n): " proceed
-if [ $proceed == y ]; then
+if [ $proceed == y ] || [ $proceed == Y ]; then
   echo "Commencing!"
 fi
 

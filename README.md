@@ -1,7 +1,9 @@
 # 4Down
 A tool for downloading threads from 4chan
 
-        Please read this before proceeding : 
+
+///
+Please read this before proceeding : 
 
 This tool uses ``wget`` and thus you need to have it installed as a dependency. 
 
@@ -17,6 +19,7 @@ These are usually preinstalled or you have them installed from another package, 
 
 Once you have the prerequisites installed, you can downlaod the program, you can either download the entire .zip from this github, or just the script itself. Once you download the script, make it executable using ```chmod +x 4down``` in the correct directory , also make sure it is in your $PATH variable. So for example /$HOME/scripts/. You can then run it via the terminal.
 
+///
 Operation :
 
 CD into the folder where you want the contents to download, this is mainly just to make sure you dont fill up your home folder with stuff (wget may have some issues and create folders, Im sure you can figure out where things get downloaded).

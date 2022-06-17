@@ -22,7 +22,7 @@ Once you have the prerequisites installed, you can downlaod the program, you can
 ///
 Operation :
 
-CD into the folder where you want the contents to download, this is mainly just to make sure you dont fill up your home folder with stuff (wget may have some issues and create folders, Im sure you can figure out where things get downloaded).
+`cd` into the directory where you want the contents to download, this is mainly just to make sure you dont fill up your home folder with stuff (wget may have some issues and create folders, Im sure you can figure out where things get downloaded).
 
 Run ``4down`` and make sure its in your path.
 Copy and paste the thread URL
@@ -35,6 +35,8 @@ It'll go and download what you have requested.
 Wait...
 
 Congratulations ! You have downloaded a thread ! You have just one more step before you're done, you choose whether you want to delete the small preview versions of files (marked with an "s" at the end), or if you want to delete the preview versions. Typically there isn't really a point in downloading the preview versions too so I usually delete them.
+
+As a note, some users may opt to modify their configuration for 4down. Since 4down is simply a script and does not rely on multiple files, it is all able to be modified directly without a config file. For example, I have my echo and printf statements use `lolcat` / `lolcrab` for rainbow colors ! For now, this is not going to be a feature but may be an opt-in feature in future.
 
 
 Thank you for using 4Down! If you have any questions, please feel free to reach out.

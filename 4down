@@ -92,7 +92,8 @@ printf "
 "
 
 echo "As a note you should also have cd'd into the directory where you want all of these contents to download to"
-read -p " Enter the URL of the thread that you want to download: " threadURL
+echo "Enter the URL of the thread that you want to download: "
+read -p "" threadURL
 echo "$threadURL"
 
 urlLength=${#threadURL}

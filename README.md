@@ -6,9 +6,9 @@ A tool for downloading threads from 4chan
 This tool uses `wget` and thus you must have it installed.
 To install the needed dependencies, you can use the following (depending on your distro):
 
-Arch and derivatives: `sudo pacman -S wget`
-Debian and derivatives: `sudo apt install wget`
-RHEL and derivatives: `sudo rpm install wget`
+Arch and derivatives: `# pacman -S wget`
+Debian and derivatives: `# apt install wget`
+RHEL and derivatives: `# rpm install wget`
 
 These are usually preinstalled, or you have them installed from another package. But just in case, it's there! ^^
 

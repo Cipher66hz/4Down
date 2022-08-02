@@ -12,9 +12,15 @@ RHEL and derivatives: `# rpm install wget`
 
 These are usually preinstalled, or you have them installed from another package. But just in case, it's there! ^^
 
-Once you have the dependencies installed, you can downlaod the program. You can either download the repository using `git clone https://github.com/Cipher66hz/4Down.git`, or just the script itself. Once you download the script, make it executable using `chmod +x 4down` in the correct directory and make sure it is in your $PATH variable. You can then run it via the terminal.
+Once you have the dependencies installed, you can download the program. You can either download the repository using `git clone https://github.com/Cipher66hz/4Down.git`, or just the script itself. Once you download the script, make it executable using `chmod +x 4down` in the correct directory and make sure it is in your $PATH variable. You can then run it via the terminal.
 
-## Usage
+## UsageIm excited not bcs you wanna use 4down
+
+BUT
+
+Because we'll have our first user :3 !!
+
+So the instructions should be all laid out here 
 
 `cd` into the directory where you want the contents to download, this is mainly just to make sure you dont fill up your home folder with stuff (wget may have some issues and create folders, Im sure you can figure out where things get downloaded).
 

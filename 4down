@@ -16,7 +16,9 @@ downloadContent() {
   mkdir -p $boardName/$threadNumber
   wget -P $boardName/$threadNumber -nd -r -p -e robots=off -D i.4cdn.org -A jpg,jpeg,png,webp,gif,webm,tmp,html,mp4,mp3,m4a -H $threadURL/ -q --show-progress
 
-  keepOrDelete
+
+  #Cleanup the preview files, this used to be the "keepOrDelete" functionality, but this has been removed as of version 2.1+
+  find -type f -name '*s.*' -delete
 }
 
 downloadThread() {
@@ -37,7 +39,9 @@ downloadThread() {
 
   wget -m -l 1 -np -p -e robots=off -w 1 -k $threadURL -q --show-progress
 
-  keepOrDelete
+  #Cleanup the preview files, this used to be the "keepOrDelete" functionality, but this has been removed as of version 2.1+
+  find -type f -name '*s.*' -delete
+
 }
 
 downloadEverything() {
@@ -49,37 +53,22 @@ downloadEverything() {
   wget -m -l 1 -nd -np -P $boardName/$threadNumber -e robots=off -k -w 1 $threadURL -q --show-progress
   wget -P $boardName/$threadNumber -nd -np -r -p -e robots=off -D i.4cdn.org -A jpg,jpeg,png,webp,gif,webm,tmp,html,mp4,mp3,m4a -H $threadURL/ -q --show-progress
 
-  keepOrDelete
+  #Cleanup the preview files, this used to be the "keepOrDelete" functionality, but this has been removed as of version 2.1+
+  find -type f -name '*s.*' -delete
 }
 
-keepOrDelete() {
-  printf " \n Congratulations! The download has finished! Would you now like to delete all of the small versions of files? (Aka the (number)s version, for example 1450614069094s. \n These versions are the smaller versions of files and therefor arent really neccessary and just are duplicates. \n Enter Yes(Y) to delete these duplicates (recommended) or No(N) to keep them\n"
 
-  read -p "Answer choice, here (Letter associated with option): " choice
-  if [ $choice == y ] || [ $choice == Y ]; then
-    echo "choice = Y"
-    echo $choice
+#Other functions not related to thread downloading :
 
-    read -p "Are you ready to proceed? (Enter y/n): " proceed
-    if [ $proceed == y ] || [ $proceed == Y ]; then
-      echo "Commencing!"
-      find -type f -name '*s.*' -delete
-      echo "Deleting!"
-      echo "Thank you for using Cipher's 4chan thread download tool! I appreciate it and hopefully it could help you. Please feel free to modify and distribute this program as you wish as it is Free Software"
-
-    fi
-    exit 0
-  fi
-
-  if [ $choice == n ] || [ $choice == N ]; then
-    echo "choice = N"
-    echo $choice
-    echo "You arent deleting anything"
-    echo "Thank you for using Cipher's 4chan thread download tool! I appreciate it and hopefully it could help you. Please feel free to modify and distribute this program as you wish as it is Free Software"
-    exit 0
-  fi
-
+makeDirectory(){
+  echo "What would you like the name of the directory where contents are downloaded to to be ? "
+  read -p "" dirName
+  echo "Making directory :" $dirName
+  mkdir $dirName
+  echo "cd'ing to :" $dirName
+  cd $dirName
 }
+
 
 # STARTS HERE, aka querying the user, all of the special functions go above
 # $(tput setaf 3) is used for making the text green.
@@ -89,12 +78,12 @@ printf "
  / // /_/ __  / __ \\ | /| / / __ \\
 /__  __/ /_/ / /_/ / |/ |/ / / / /
   /_/  \\____/\\____/|__/|__/_/ /_/
-"
+" | lolcrab
 
-echo "As a note you should also have cd'd into the directory where you want all of these contents to download to"
-echo "Enter the URL of the thread that you want to download: "
+makeDirectory
+echo "Enter the URL of the thread that you want to download: " | lolcrab
 read -p "" threadURL
-echo "$threadURL"
+echo "$threadURL"  | lolcrab
 
 urlLength=${#threadURL}
 
@@ -107,25 +96,25 @@ echo $threadURLStripped
 
 threadURLStripped="${threadURLStripped#https://boards.4channel.org}"
 threadURLStripped="${threadURLStripped#https://boards.4chan.org}"
-echo "$threadURLStripped"
+#echo "$threadURLStripped"
 threadURLStripped=${threadURLStripped//thread/}
-echo "$threadURLStripped"
+#echo "$threadURLStripped"
 threadURLStripped=${threadURLStripped///}
-echo "$threadURLStripped"
+#echo "$threadURLStripped"
 threadURLStripped=${threadURLStripped//[0-9]/}
-echo "$threadURLStripped"
+#echo "$threadURLStripped"
 
 boardName=$threadURLStripped
 
 threadNumStripped=$threadURL
 threadNumStripped="${threadNumStripped#https://boards.4channel.org}"
-echo "$threadURLStripped"
+#echo "$threadURLStripped"
 threadNumStripped=${threadNumStripped//thread/}
-echo "$threadNumStripped"
+#echo "$threadNumStripped"
 threadNumStripped=${threadNumStripped///}
-echo "$threadNumStripped"
+#echo "$threadNumStripped"
 threadNumStripped=${threadNumStripped//[!0-9]/}
-echo "$threadNumStripped"
+#echo "$threadNumStripped"
 
 threadNumber=$threadNumStripped
 

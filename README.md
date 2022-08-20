@@ -20,7 +20,6 @@ Once you have the dependencies installed, you can download the program. You can 
 
 Run `4down`.<br/>
 Copy and paste the thread URL.<br/>
-The thread shows off some neat separation, but you can comment those lines out if you dont want it to show itself breaking down the link.
 
 You then choose whether you want to download all of the contents to make a copy of the given thread, or if you want to download just the file content (images, videos, GIFs, etc.). As a new feature implemented in update 2.0, You are able to do a mix of both, and download not only a copy of the thread that is effectively fully functional, but also all of the contents of the thread as well!
 

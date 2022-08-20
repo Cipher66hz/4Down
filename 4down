@@ -78,12 +78,12 @@ printf "
  / // /_/ __  / __ \\ | /| / / __ \\
 /__  __/ /_/ / /_/ / |/ |/ / / / /
   /_/  \\____/\\____/|__/|__/_/ /_/
-" | lolcrab
+" 
 
 makeDirectory
-echo "Enter the URL of the thread that you want to download: " | lolcrab
+echo "Enter the URL of the thread that you want to download: " 
 read -p "" threadURL
-echo "$threadURL"  | lolcrab
+echo "$threadURL"  
 
 urlLength=${#threadURL}
 

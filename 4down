@@ -13,12 +13,9 @@ downloadContent() {
   echo "Thread number is: " $threadNumber
   # wget -nd -r --level=1 -e robots=off -A jpg,jpeg,png,webp,gif,webm,tmp,html -H --wait 1 $threadURL
 
-  mkdir -p $boardName/$threadNumber
-  wget -P $boardName/$threadNumber -nd -r -p -e robots=off -D i.4cdn.org -A jpg,jpeg,png,webp,gif,webm,tmp,html,mp4,mp3,m4a -H $threadURL/ -q --show-progress
+  wget -nd -r -p -nd -e robots=off -D i.4cdn.org -A jpg,jpeg,png,webp,gif,webm,tmp,html,mp4,mp3,m4a -H $threadURL/ -q --show-progress
 
-
-  #Cleanup the preview files, this used to be the "keepOrDelete" functionality, but this has been removed as of version 2.1+
-  find -type f -name '*s.*' -delete
+  deleteMinis
 }
 
 downloadThread() {
@@ -37,11 +34,9 @@ downloadThread() {
 
   # Notes to self ^^
 
-  wget -m -l 1 -np -p -e robots=off -w 1 -k $threadURL -q --show-progress
+  wget -m -l 1 -np -nd -p -e robots=off -w 1 -k $threadURL -q --show-progress
 
-  #Cleanup the preview files, this used to be the "keepOrDelete" functionality, but this has been removed as of version 2.1+
-  find -type f -name '*s.*' -delete
-
+  deleteMinis
 }
 
 downloadEverything() {
@@ -50,40 +45,41 @@ downloadEverything() {
   echo "Board name is: " $boardName
   echo "Thread number is: " $threadNumber
 
-  wget -m -l 1 -nd -np -P $boardName/$threadNumber -e robots=off -k -w 1 $threadURL -q --show-progress
-  wget -P $boardName/$threadNumber -nd -np -r -p -e robots=off -D i.4cdn.org -A jpg,jpeg,png,webp,gif,webm,tmp,html,mp4,mp3,m4a -H $threadURL/ -q --show-progress
+  wget -m -l 1 -nd -np -e robots=off -k -w 1 $threadURL -q --show-progress
+  wget -nd -np -r -p -e robots=off -D i.4cdn.org -A jpg,jpeg,png,webp,gif,webm,tmp,html,mp4,mp3,m4a -H $threadURL/ -q --show-progress
 
-  #Cleanup the preview files, this used to be the "keepOrDelete" functionality, but this has been removed as of version 2.1+
-  find -type f -name '*s.*' -delete
+  deleteMinis
+      
 }
 
+deleteMinis() {
+    echo "Deleting preview files now >:D"
+    find -type f -name '*s.*' -delete
 
-#Other functions not related to thread downloading :
-
-makeDirectory(){
-  echo "What would you like the name of the directory where contents are downloaded to to be ? "
-  read -p "" dirName
-  echo "Making directory :" $dirName
-  mkdir $dirName
-  echo "cd'ing to :" $dirName
-  cd $dirName
 }
-
-
 # STARTS HERE, aka querying the user, all of the special functions go above
 # $(tput setaf 3) is used for making the text green.
+
+
+#note to self, font used for the 4down ascii logo:
+#smslant 
+
+#https://www.fontchanger.net/ascii-text.html
+
+
+
 echo "					Cipher's 4chan thread download tool"
 printf "
   / // / ____/ /___ _      ______
  / // /_/ __  / __ \\ | /| / / __ \\
 /__  __/ /_/ / /_/ / |/ |/ / / / /
   /_/  \\____/\\____/|__/|__/_/ /_/
-" 
+" | lolcrab
 
-makeDirectory
-echo "Enter the URL of the thread that you want to download: " 
+echo "As a note you should also have cd'd into the directory where you want all of these contents to download to" | lolcrab
+echo "Enter the URL of the thread that you want to download: " | lolcrab
 read -p "" threadURL
-echo "$threadURL"  
+#echo "$threadURL"  |lolcrab
 
 urlLength=${#threadURL}
 
@@ -92,7 +88,7 @@ urlLength=${#threadURL}
 
 # Make a copy of threadURL (original value inputted by the user) into threadURLStripped to modify
 threadURLStripped=$threadURL
-echo $threadURLStripped
+#echo $threadURLStripped
 
 threadURLStripped="${threadURLStripped#https://boards.4channel.org}"
 threadURLStripped="${threadURLStripped#https://boards.4chan.org}"
@@ -118,7 +114,7 @@ threadNumStripped=${threadNumStripped//[!0-9]/}
 
 threadNumber=$threadNumStripped
 
-printf "Which of the following choices do you want? \n 1) Download just the content from the thread (images and videos). \n 2) Download the entire thread and all of the stuff required to display it. \n 3) 2 and 1 combined, it downloads all of the content and a visible version of the thread!\n"
+printf "Which of the following choices do you want? \n 1) Download just the content from the thread (images and videos). \n 2) Download a copy of the thread (does not include the images/videos as their own files) . \n 3) 2 and 1 combined, it downloads all of the content and a visible version of the thread!\n"
 read -p "Answer choice, here (Number associated with option): " userChoice
 echo $userChoice
 read -p "Are you ready to proceed? (Enter y/n): " proceed

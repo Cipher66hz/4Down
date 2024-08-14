@@ -24,16 +24,6 @@ downloadThread() {
   echo "Board name is: " $boardName
   echo "Thread number is: " $threadNumber
 
-  # Notes to self :
-  # What some bro on 4chan gave to me to answer this issue :
-  # wget -r -H -D i.4cdn.org,boards.4channel.org -I "$boardName",thread -p -P . -A html,jpg,jpeg,gif,png,webm https://boards.4channel.org/$boardName/thread/<thread#> -e robots=off --wait 1 $threadURL
-  # My modified version can be found below
-  # wget -r -H --page-requisites -D i.4cdn.org/$boardName , boards.4channel.org/$boardName, boards.4chan.org/$boardName -I "$boardName",thread -p -P --convert-links -A html,jpg,jpeg,gif,png,webm https://boards.4channel.org/$boardName/thread/$threadNumber -e robots=off --wait 1 $threadURL
-  #
-  # The part that does not work is the -D flag where it tries to just allow itself to download from those URLs. It has to be fully recursive or limit the recursion for now.
-
-  # Notes to self ^^
-
   wget -m -l 1 -np -nd -p -e robots=off -w 1 -k $threadURL -q --show-progress
 
   deleteMinis
@@ -74,12 +64,12 @@ printf "
  / // /_/ __  / __ \\ | /| / / __ \\
 /__  __/ /_/ / /_/ / |/ |/ / / / /
   /_/  \\____/\\____/|__/|__/_/ /_/
-" | lolcrab
+" | lolcat
 
-echo "As a note you should also have cd'd into the directory where you want all of these contents to download to" | lolcrab
-echo "Enter the URL of the thread that you want to download: " | lolcrab
+echo "As a note you should also have cd'd into the directory where you want all of these contents to download to" | lolcat
+echo "Enter the URL of the thread that you want to download: " | lolcat
 read -p "" threadURL
-#echo "$threadURL"  |lolcrab
+#echo "$threadURL"  | lolcat
 
 urlLength=${#threadURL}
 

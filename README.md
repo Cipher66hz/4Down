@@ -1,5 +1,6 @@
-# 4Down
-A tool for downloading threads from 4chan
+![image](https://github.com/user-attachments/assets/46150d51-795e-444b-a58c-1896317c0b06) <br>
+A tool for downloading threads and their content from 4chan
+
 
 ## Prerequisites
 

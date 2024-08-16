@@ -30,7 +30,7 @@ As a note, some users may opt to modify their configuration for 4down. Since 4do
 
 Thank you for using 4Down! If you have any questions, please feel free to reach out.
 
-TODO:
-- [] FIX the issue where it will only download the "s" (small) versions of images, and the thread HTML file. BUT NO FILES.
-- [] SOME MAIN SOFTWRAE FUNCTIONALITY IS BROKEN UNTIL THAT GETS FIXED LMAO
-- 
+**TODO**:
+- [ ] FIX the issue where it will only download the "s" (small) versions of images, and the thread HTML file. BUT NO FILES.
+- [ ] SOME MAIN SOFTWRAE FUNCTIONALITY IS BROKEN UNTIL THAT GETS FIXED LMAO
+  

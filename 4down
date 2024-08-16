@@ -2,63 +2,40 @@
 
 set -euo pipefail
 IFS=$'\n\t'
-# Strict mode ^
 
-# Functions go here :
+# Functions
 
 downloadContent() {
   echo "downloadContent function executed"
-  echo "Thread URL is: " $threadURL
-  echo "Board name is: " $boardName
-  echo "Thread number is: " $threadNumber
-  # wget -nd -r --level=1 -e robots=off -A jpg,jpeg,png,webp,gif,webm,tmp,html -H --wait 1 $threadURL
+  echo "Thread URL is: $threadURL"
+  echo "Board name is: $boardName"
+  echo "Thread number is: $threadNumber"
 
-  wget -nd -r -p -nd -e robots=off -D i.4cdn.org -A jpg,jpeg,png,webp,gif,webm,tmp,html,mp4,mp3,m4a -H $threadURL/ -q --show-progress
-
-  deleteMinis
+  # Use wget to download only full-size images and videos, avoiding the 's' versions.
+  wget -r -np -nH -nd -e robots=off -A "jpg,jpeg,png,webp,gif,webm,mp4,mp3,m4a" -R "*s.jpg,*s.jpeg,*s.png,*s.webp" -H "$threadURL" -q --show-progress
 }
 
 downloadThread() {
   echo "downloadThread function executed"
-  echo "Thread URL is: " $threadURL
-  echo "Board name is: " $boardName
-  echo "Thread number is: " $threadNumber
+  echo "Thread URL is: $threadURL"
+  echo "Board name is: $boardName"
+  echo "Thread number is: $threadNumber"
 
-  wget -m -l 1 -np -nd -p -e robots=off -w 1 -k $threadURL -q --show-progress
-
-  deleteMinis
+  wget -m -l 1 -np -nd -p -e robots=off -w 1 -k "$threadURL" -q --show-progress
 }
 
 downloadEverything() {
   echo "downloadEverything function executed"
-  echo "Thread URL is: " $threadURL
-  echo "Board name is: " $boardName
-  echo "Thread number is: " $threadNumber
+  echo "Thread URL is: $threadURL"
+  echo "Board name is: $boardName"
+  echo "Thread number is: $threadNumber"
 
-  wget -m -l 1 -nd -np -e robots=off -k -w 1 $threadURL -q --show-progress
-  wget -nd -np -r -p -e robots=off -D i.4cdn.org -A jpg,jpeg,png,webp,gif,webm,tmp,html,mp4,mp3,m4a -H $threadURL/ -q --show-progress
-
-  deleteMinis
-      
+  wget -m -l 1 -nd -np -e robots=off -k -w 1 "$threadURL" -q --show-progress
+  wget -r -np -nH -nd -e robots=off -A "jpg,jpeg,png,webp,gif,webm,mp4,mp3,m4a" -R "*s.jpg,*s.jpeg,*s.png,*s.webp" -H "$threadURL" -q --show-progress
 }
 
-deleteMinis() {
-    echo "Deleting preview files now >:D"
-    find -type f -name '*s.*' -delete
-
-}
-# STARTS HERE, aka querying the user, all of the special functions go above
-# $(tput setaf 3) is used for making the text green.
-
-
-#note to self, font used for the 4down ascii logo:
-#smslant 
-
-#https://www.fontchanger.net/ascii-text.html
-
-
-
-echo "					Cipher's 4chan thread download tool"
+# Main execution
+echo "                                  Cipher's 4chan thread download tool"
 printf "
   / // / ____/ /___ _      ______
  / // /_/ __  / __ \\ | /| / / __ \\
@@ -69,50 +46,29 @@ printf "
 echo "As a note you should also have cd'd into the directory where you want all of these contents to download to" | lolcat
 echo "Enter the URL of the thread that you want to download: " | lolcat
 read -p "" threadURL
-#echo "$threadURL"  | lolcat
 
-urlLength=${#threadURL}
-
-# https://boards.4channel.org/wsg/thread/4483299
-# Example thread ^^^
-
-# Make a copy of threadURL (original value inputted by the user) into threadURLStripped to modify
-threadURLStripped=$threadURL
-#echo $threadURLStripped
-
-threadURLStripped="${threadURLStripped#https://boards.4channel.org}"
+# Extracting board name and thread number from URL
+threadURLStripped="${threadURL#https://boards.4channel.org}"
 threadURLStripped="${threadURLStripped#https://boards.4chan.org}"
-#echo "$threadURLStripped"
 threadURLStripped=${threadURLStripped//thread/}
-#echo "$threadURLStripped"
 threadURLStripped=${threadURLStripped///}
-#echo "$threadURLStripped"
-threadURLStripped=${threadURLStripped//[0-9]/}
-#echo "$threadURLStripped"
+boardName=${threadURLStripped//[0-9]/}
 
-boardName=$threadURLStripped
-
-threadNumStripped=$threadURL
-threadNumStripped="${threadNumStripped#https://boards.4channel.org}"
-#echo "$threadURLStripped"
+threadNumStripped=${threadURL#https://boards.4channel.org}
 threadNumStripped=${threadNumStripped//thread/}
-#echo "$threadNumStripped"
 threadNumStripped=${threadNumStripped///}
-#echo "$threadNumStripped"
-threadNumStripped=${threadNumStripped//[!0-9]/}
-#echo "$threadNumStripped"
+threadNumber=${threadNumStripped//[!0-9]/}
 
-threadNumber=$threadNumStripped
-
+# User choice
 printf "Which of the following choices do you want? \n 1) Download just the content from the thread (images and videos). \n 2) Download a copy of the thread (does not include the images/videos as their own files) . \n 3) 2 and 1 combined, it downloads all of the content and a visible version of the thread!\n"
 read -p "Answer choice, here (Number associated with option): " userChoice
-echo $userChoice
 read -p "Are you ready to proceed? (Enter y/n): " proceed
-if [ $proceed == y ] || [ $proceed == Y ]; then
-  echo "Commencing!"
+if [ "$proceed" != "y" ] && [ "$proceed" != "Y" ]; then
+  echo "Operation aborted."
+  exit 1
 fi
 
-# use case statement to determine which choice the user has chosen
+# Case statement for user choice
 case $userChoice in
 1)
   downloadContent
@@ -127,5 +83,3 @@ case $userChoice in
   echo "Invalid choice"
   ;;
 esac
-
-# Wow, you're reading this! That must mean that you're reading over the software you use! Yay!

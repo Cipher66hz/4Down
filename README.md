@@ -29,3 +29,8 @@ Congratulations, you have downloaded a thread! You have just one more step befor
 As a note, some users may opt to modify their configuration for 4down. Since 4down is simply a script and does not rely on a config file, it is all able to be modified directly. For example, I have my `echo` and `printf` statements use `lolcat`/`lolcrab` for rainbow colors! For now, this is not going to be a feature but may be an opt-in feature in the future. There are also some unncessary echo commands which you may choose to comment out, I keep them in for troubleshooting/experimentation. 
 
 Thank you for using 4Down! If you have any questions, please feel free to reach out.
+
+TODO:
+- [] FIX the issue where it will only download the "s" (small) versions of images, and the thread HTML file. BUT NO FILES.
+- [] SOME MAIN SOFTWRAE FUNCTIONALITY IS BROKEN UNTIL THAT GETS FIXED LMAO
+- 
